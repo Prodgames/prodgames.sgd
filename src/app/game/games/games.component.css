@@ -1,0 +1,41 @@
+.btn-add-game {
+    border-style: none;
+    background-color: #4098FF;
+    color: white;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+    outline: none;
+}
+
+.btn-add-game:hover {
+    transition: 500ms;
+    background-color: #186ecf;
+    box-shadow: black;
+}
+
+.page-header {
+    border-bottom-style: solid;
+    margin: 0 20px 30px 20px;
+    border-bottom-color: #dde3e8;
+    border-bottom-width: 2px;
+}
+
+@media screen and (max-width: 648px) {
+    .page-description {
+        display: none;
+    }
+
+    .page-header {
+        border-bottom-style: none;
+        margin: 10px 0;
+    }
+}

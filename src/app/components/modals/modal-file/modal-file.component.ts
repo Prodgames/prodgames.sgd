@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
-import { CreditService } from 'src/app/credit/credit.service';
 import { GameService } from 'src/app/game/game.service';
 import Swal from 'sweetalert2';
 
@@ -45,7 +44,6 @@ export class ModalFileComponent implements OnInit {
 
   constructor(
     private readonly _authenticationService: AuthService,
-    private readonly _creditService: CreditService,
     private readonly _gameService: GameService
   ) { }
 

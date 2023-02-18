@@ -6,11 +6,9 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalInfoComponent } from './modals/modal-info/modal-info.component';
-import { ModalGiftComponent } from './modals/modal-gift/modal-gift.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { ModalFileComponent } from './modals/modal-file/modal-file.component';
 import { ModalShareComponent } from './modals/modal-share/modal-share.component';
 @NgModule({
   imports: [
@@ -27,8 +25,6 @@ import { ModalShareComponent } from './modals/modal-share/modal-share.component'
     NavbarComponent,
     SidebarComponent,
     ModalInfoComponent,
-    ModalGiftComponent,
-    ModalFileComponent,
     ModalShareComponent
   ],
   exports: [

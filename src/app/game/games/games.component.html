@@ -1,83 +1,90 @@
-<div class="header bg-gradient-danger pb-3 pt-3">
-  <div class="container-fluid">
-    <div class="header-body">
-      <h1 style="text-align: center; color: white;">Juegos disponibles</h1>
-      <h3 style="text-align: center; color: white;">Selecciona uno o más juegos y personalizalos !</h3>
-    </div>
-  </div>
-</div>
-<div class="container-fluid mt-3">
-  <div class="row">
-    <div class="col col-md-4" *ngFor="let game of games">
-      <div style="width: 18rem; margin: auto;">
-        <!-- Card stats -->
-        <div class="card card-stats mb-4 mb-lg-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">{{game.name}}</h5>
-                <img style="width: 100%; padding: 0em;" src="{{game.photo}}" alt="">
-                <br>
-                <p>{{game.description}}</p>
-              </div>
-            </div>
-            <p class="mt-0 mb-0 text-muted text-sm" align="right">
-              <button type="button" class="btn btn-outline-success" (click)="import(game.id)">Importar</button>
+<div style="height: 79vh">
+  <div class="header pb-3 pt-3 page-header">
+    <div class="container-fluid">
+      <div
+        class="header-body"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div style="display: flex; gap: 20px; align-items: center">
+          <img
+            src="../../../assets/svg/game-over.svg"
+            style="width: 100px"
+            class="page-description"
+          />
+          <div
+            style="max-width: 300px; max-height: 81px"
+            class="page-description"
+          >
+            <p>
+              Manage and update game information including title, description,
+              release date, and more.
             </p>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col col-md-4">
-      <div style="width: 18rem; margin: auto;">
-        <!-- Card stats -->
-        <div class="card card-stats mb-4 mb-lg-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">CANDY MATCH</h5>
-                <img style="width: 100%; padding: 0em;" src="../../../assets/img/games/Free-Candy-Match-3-Game-Items-720x480.jpg" alt="">
-                <br>
-                <p>
-                  Juego de emparejamiento de fichas
-                </p>
-              </div>
-            </div>
-            <p class="mt-0 mb-0 text-muted text-sm" align="right">
-              <button type="button" class="btn btn-success" disabled style="background-color: #8898aa; border-color: #8898aa;">Próximamente</button>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col col-md-4">
-      <div style="width: 18rem; margin: auto;">
-        <!-- Card stats -->
-        <div class="card card-stats mb-4 mb-lg-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">PONG GOAL</h5>
-                <img style="width: 100%; padding: 0em;" src="../../../assets/img/games/Pong-Football-2D-Game-Kit-720x480.jpg" alt="">
-                <br>
-                <p>
-                  Dispara fichas, emparéjalas y gana puntos!
-                  <!-- <br> -->
-                </p>
-              </div>
-            </div>
-            <p class="mt-0 mb-0 text-muted text-sm" align="right">
-              <button type="button" class="btn btn-success" disabled style="background-color: #8898aa; border-color: #8898aa;">Próximamente</button>
-            </p>
-          </div>
+        <div>
+          <button class="btn-add-game">+ NUEVO</button>
         </div>
       </div>
     </div>
   </div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col col-md-4" *ngFor="let game of games">
+        <div style="width: 18rem; margin: auto">
+          <!-- Card stats -->
+          <div class="card card-stats mb-4 mb-lg-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div style="margin-bottom: 10px">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      {{ game.name }}
+                    </h5>
+                  </div>
+                  <img
+                    style="
+                      width: 240px;
+                      height: 240px;
+                      padding: 0em;
+                      border-radius: 10px;
+                    "
+                    src="{{ game.photo }}"
+                    alt=""
+                  />
+                  <br />
+                  <div style="height: 54px; margin: 10px 0">
+                    <p
+                      style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                      "
+                    >
+                      {{ game.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-0 mb-0 text-muted text-sm" align="right">
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  [routerLink]="['/library/my-game']"
+                  [queryParams]="{ gameId: game.id }"
+                >
+                  Configurar
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
