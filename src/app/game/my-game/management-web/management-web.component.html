@@ -1,0 +1,42 @@
+<div class="table-responsive mt-2" style="background-color: white;">
+  <div>
+    <table class="table align-items-center">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="sort" data-sort="name">Propiedad</th>
+          <th scope="col" class="sort" data-sort="budget">Valor</th>
+          <th scope="col" class="sort" data-sort="status">Acción</th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr *ngFor="let detail of details">
+          <td scope="row" >
+            <div class="media align-items-center">
+              <div class="media-body">
+                <span class="name mb-0 text-sm">{{detail.property}}</span>
+              </div>
+            </div>
+          </td>
+          <td class="budget">
+            <ng-container *ngIf="detail.type=='file'">
+              <img src="{{detail.value}}" style="width: 100%; max-width: 200px;" alt="">
+            </ng-container>
+            <ng-container *ngIf="detail.type!='file'">
+              {{detail.value}}
+            </ng-container>
+          </td>
+          <td>
+            <span class="badge badge-dot mr-4">
+              <ng-container *ngIf="detail.type!='file'">
+                <i class="bi bi-pencil-square cursor-hover" (click)="changeValueGeneric(detail)"></i>
+              </ng-container>
+              <ng-container *ngIf="detail.type=='file'">
+                <i class="bi bi-pencil-square cursor-hover" (click)="changeValueFile(detail)"></i>
+              </ng-container>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  height: 100vh;
+  background-color: black;
+}
+
+.ng-sidebar {
+  background-color: rgb(255, 255, 255);
+  max-width: 350px;
+  // margin-top: 50px;
+  // margin-bottom: 50px;
+}
+
+.cursor-hover {
+  cursor: pointer;
+}
+
+
+.btn.btn-round,
+.btn.btn-round .mat-button-ripple,
+.btn.btn-round > .mat-button-focus-overlay,
+.mat-button.btn.btn-round,
+.mat-button.btn.btn-round .mat-button-ripple,
+.mat-button.btn.btn-round > .mat-button-focus-overlay,
+.mat-raised-button.btn.btn-round,
+.mat-raised-button.btn.btn-round .mat-button-ripple,
+.mat-raised-button.btn.btn-round > .mat-button-focus-overlay,
+.mat-raised-button.btn:not([class*="mat-elevation-z"]).btn-round,
+.mat-raised-button.btn:not([class*="mat-elevation-z"]).btn-round
+  .mat-button-ripple,
+.mat-raised-button.btn:not([class*="mat-elevation-z"]).btn-round
+  > .mat-button-focus-overlay {
+  border-radius: 30px;
+}
+
+.btn.btn-primary,
+.mat-button.btn.btn-primary,
+.mat-raised-button.btn.btn-primary,
+.mat-raised-button.btn:not([class*="mat-elevation-z"]).btn-primary {
+  color: #fff;
+  background-color: #9c27b0;
+  border-color: #9c27b0;
+  box-shadow: 0 2px 2px 0 rgb(156 39 176 / 14%),
+    0 3px 1px -2px rgb(156 39 176 / 20%), 0 1px 5px 0 rgb(156 39 176 / 12%);
+}
+
+form .no-border {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.input-group .form-control {
+  -webkit-transition: background-image 0.9s linear;
+  -moz-transition: background-image 0.9s linear;
+  -o-transition: background-image 0.9s linear;
+  transition: background-image 0.9s linear;
+  border-bottom-right-radius: 0;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  background-image: linear-gradient(
+      0deg,
+      #9b27b000 2px,
+      rgba(155, 39, 176, 0) 0
+    ),
+    linear-gradient(0deg, #d2d2d200 1px, hsla(0, 0%, 82.4%, 0) 0);
+}
+
+.input-group .form-control:focus {
+  border-color: transparent;
+  box-shadow: none;
+  background-image: linear-gradient(0deg, #9c27b0 2px, rgba(156, 39, 176, 0) 0),
+    linear-gradient(0deg, #d2d2d2 1px, hsla(0, 0%, 82.4%, 0) 0);
+}
+
+.custom-dropzone{
+  width: 100%;
+  margin: auto;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  background-color: rgb(196, 196, 196);
+  // border: 5px solid rgb(235, 79, 79);
+}
+
+ngx-dropzone-label{
+  top: -25px !important;
+}
+
+ngx-dropzone-image-preview{
+  margin: auto !important;
+  padding-top: 15px !important;
+}
+
+ngx-dropzone-image-preview > img{
+  padding-top: 15px !important;
+}
+
+body > body{
+  margin: 0 !important;
+}
+
+iframe > body {
+  margin: 0 !important;
+}

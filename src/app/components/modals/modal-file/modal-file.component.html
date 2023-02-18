@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeMyModal(false)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="row">
+      <div class="col-md-12" align="center">
+        <a href="{{detail.value}}" target="_blank" rel="noopener noreferrer">Ver imágen actual en una pestaña nueva</a>
+      </div>
+      <div class="col-md-12" style="margin-top: 1em;">
+        <div class="custom-dropzone" ngx-dropzone [multiple]="false" [accept]="'image/*'" (change)="onSelect($event)">
+          <ngx-dropzone-label>
+            <div>
+              <h2>Arrastra tu imágen aquí</h2>
+              <h2>Ó haz click aquí para subir tu imágen</h2>
+            </div>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview style="margin: auto !important; padding-top: 15px !important;"
+            ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
+            (removed)="onRemove(f)">
+            <ngx-dropzone-label>
+              {{ f.name }}
+              ({{ f.type }})
+            </ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="changePropertyFile()">Guardar</button>
+  <button type="button" class="btn btn-outline-dark" (click)="closeMyModal(false)">Cerrar</button>
+</div>

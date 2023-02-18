@@ -1,0 +1,30 @@
+<div class="header bg-gradient-danger pb-3 pt-3">
+  <div class="container-fluid">
+    <div class="header-body">
+      <h1 style="text-align: center; color: white;">Características</h1>
+      <h3 style="text-align: center; color: white;">Edita las propiedades de tu juego y personalizalo a tu gusto</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-1">
+  <div class="row">
+    <div class="col-sm-6">
+      <div align="center">
+        <button type="button" class="btn btn-outline-default btn-lg btn-block" [ngClass]="{'active':active===1}" (click)="changeView(1)">SISTEMA WEB</button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div align="center">
+        <button type="button" class="btn btn-outline-default btn-lg btn-block" [ngClass]="{'active':active===2}" (click)="changeView(2)">VIDEOJUEGO</button>
+      </div>
+    </div>
+    <br><br>
+    <div class="col-sm-12">
+      <app-management-web *ngIf="active==1"></app-management-web>
+    </div>
+    <div class="col-sm-12">
+      <app-management-game *ngIf="active==2"></app-management-game>
+    </div>
+  </div>
+</div>

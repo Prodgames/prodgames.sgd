@@ -1,0 +1,119 @@
+<!-- <router-outlet></router-outlet> -->
+<div class="container-fluid bg-image">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-10 ml-auto mr-auto pr-8 pl-8">
+      <div class="row container-float p-3">
+        <div class="col-sm-12">
+          <table style="margin: auto;">
+            <tr>
+              <td>
+                <h4 [class]="currentClassSignin" (click)="changeAuth('signin')" style="font-weight: 400;">
+                  Iniciar sesión
+                </h4>
+              </td>
+              <td>
+                <h5 style="color: gray;">
+                  &nbsp;/&nbsp;
+                </h5>
+              </td>
+              <td>
+                <!-- [ngStyle]="{ 'color': nav.color }" -->
+                <!-- [ngClass]="{'btn-gkn-secondary':img!=null,'gkn-disabled-variant':img==null}" -->
+                <h4 [class]="currentClassSignup" (click)="changeAuth('signup')" style="font-weight: 400;">
+                  Crear Cuenta
+                </h4>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-sm-12 col-md-6" style="margin: auto;">
+          <table style="max-width: 350px; margin: auto;">
+            <tr>
+              <td>
+                <i class="bi bi-graph-up" style="color: #1ee962; font-size: 2em;"></i>
+              </td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <h3>Stock en movimiento</h3>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <p style="font-size: .875rem;">
+                  Mejora la rotación de tus productos y servicios, ofreciendo descuentos o los mismo en su totalidad
+                </p>
+              </td>
+            </tr>
+          </table>
+          <table style="max-width: 350px; margin: auto;">
+            <tr>
+              <td>
+                <i class="bi bi-gift" style="color: #E91E63; font-size: 2em;"></i>
+              </td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <h3>Descuentos y premios</h3>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <p style="font-size: .875rem;">
+                  Incentiva a tus colaboradores y fideliza a tus clientes mediante divertidos juegos con tu marca
+                </p>
+              </td>
+            </tr>
+          </table>
+          <table style="max-width: 350px; margin: auto;">
+            <tr>
+              <td>
+                <i class="bi bi-emoji-heart-eyes" style="color: #e9dc1e; font-size: 2em;"></i>
+              </td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <h3>Experiencias inolvidables</h3>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                &nbsp;&nbsp;
+              </td>
+              <td>
+              <td>
+                <p style="font-size: .875rem;">
+                  ¿Sabías que la publicidad en videojuegos es más efectiva que los otros canales publcitarios?
+                </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-sm-12 col-md-6" style="margin: auto;">
+          <br>
+          <app-signin *ngIf="currentClassSignin=='title-form-active'"></app-signin>
+          <app-signup *ngIf="currentClassSignup=='title-form-active'"></app-signup>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

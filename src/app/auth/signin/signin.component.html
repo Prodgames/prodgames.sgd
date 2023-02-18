@@ -1,0 +1,45 @@
+<form class="form-signup">
+  <!-- <br> -->
+  <div class="mb-3">
+    <table style="margin: auto;">
+      <tr>
+        <td>
+          <!-- <button href="#" class="btn btn-primary google-plus"> Login with Google  <i class="bi bi-google" aria-hidden="true"></i> </button> -->
+          <div class="container-icon-rrss">
+            <div align="center">
+              <i class="bi bi-google" aria-hidden="true"></i>
+            </div>
+          </div>
+        </td>
+        <!-- <td>
+          &nbsp;&nbsp;
+        </td>
+        <td>
+          <div class="container-icon-rrss">
+            <i class="bi bi-facebook" aria-hidden="true"></i>
+          </div>
+        </td> -->
+      </tr>
+    </table>
+  </div>
+  <p align="center">o de forma clásica:</p>
+  <br>
+  <div class="mb-3">
+    <div class="input-group">
+      <div class="input-group-prepend no-border"><span class="input-group-text no-border"><i class="bi bi-envelope-fill icon-form" aria-hidden="true"></i></span></div>
+      <input placeholder="Correo" [(ngModel)]="email" type="email" name="email" class="form-control no-border">
+    </div>
+  </div>
+  <br>
+  <div class="mb-3">
+    <div class="input-group">
+      <div class="input-group-prepend no-border"><span class="input-group-text no-border"><i class="bi bi-lock-fill icon-form" aria-hidden="true"></i></span></div>
+      <input placeholder="Contraseña" [(ngModel)]="password" type="password" name="password" class="form-control no-border">
+    </div>
+  </div>
+  <div class="mb-3" align="center">
+    <button type="button" (click)="signInApi()" class="btn btn-primary btn-round mt-4">
+      INGRESAR
+    </button>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+.container-icon-rrss {
+  margin: auto;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 15%;
+  background-color: #f5365c;
+  border: 0.5px solid #f5365c;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-sg {
+  /* background-color: #04AA6D; */
+  border: none;
+  /* color: white; */
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
+}
+
+.icon-form{
+  color: rgb(63, 63, 63);
+  font-size: 1.5em;
+}
+
+
+.form-signup{
+  max-width: 350px;
+  margin: auto;
+}

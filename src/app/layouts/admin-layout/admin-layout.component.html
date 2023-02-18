@@ -1,0 +1,23 @@
+<!-- Sidenav -->
+<ng-sidebar-container>
+
+  <!-- A sidebar -->
+  <ng-sidebar [(opened)]="opened" position="left" mode="push" showBackdrop="true" closeOnClickOutside="true">
+    <app-sidebar (collapsed)="toggleSidebar()"></app-sidebar>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content>
+    <!-- <router-outlet></router-outlet> -->
+    <!-- <div class="main-content"> -->
+      <app-navbar (collapsed)="toggleSidebar()"></app-navbar>
+      <router-outlet></router-outlet>
+      <div class="container-fluid">
+        <app-footer></app-footer>
+      </div>
+    <!-- </div> -->
+  </div>
+
+
+
+</ng-sidebar-container>
