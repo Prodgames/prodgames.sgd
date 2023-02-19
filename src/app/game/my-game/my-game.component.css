@@ -1,0 +1,95 @@
+.btn-add-game {
+    border-style: none;
+    background-color: #EC6436;
+    color: white;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+    outline: none;
+}
+
+.btn-add-game:hover {
+    transition: 500ms;
+    background-color: #186ecf;
+    box-shadow: black;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+
+    margin: 0 0px 20px 0px;
+    color: white;
+
+    min-height: 255px;
+
+    background: linear-gradient(90.09deg, #202020 10.43%, rgba(105, 0, 210, 0) 259.13%);
+}
+
+.banner-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 5px rgba(97, 0, 255, 0.05);
+}
+
+.banner-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.properties-container {
+    display: flex;
+    gap: 10px;
+}
+
+.property {
+    box-sizing: border-box;
+
+    height: 40px;
+
+    background: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    box-shadow: 0px 0px 3px 1px rgba(193, 193, 193, 0.05);
+    border-radius: 93px;
+
+    padding: 0 20px;
+
+    outline: none;
+}
+
+.property-name {
+    width: 177px;
+}
+
+.property-value {
+    width: 281px;
+}
+
+.property-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('../../../assets/svg/icons/down-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 25px;
+    width: 160px;
+}
+
+@media screen and (max-width: 648px) {
+    .page-header {
+        border-bottom-style: none;
+        margin: 10px 0;
+    }
+}

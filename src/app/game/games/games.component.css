@@ -19,7 +19,7 @@
 .btn-add-game:hover {
     transition: 500ms;
     background-color: #186ecf;
-    box-shadow: black;
+    box-shadow: 0px 0px 4px 5px rgba(97, 0, 255, 0.05);
 }
 
 .page-header {

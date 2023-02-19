@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
+import { IGame } from "./model/game.interface";
+import { Observable } from "rxjs";
+import { IResponse } from "./model/response.interface";
 
 @Injectable({
   providedIn: "root",
@@ -25,14 +28,8 @@ export class GameService {
     );
   }
 
-  /*     getDetailGameByClientUnity(idClient) {
-      return this.http.get<any>(
-        environment.api + '/client-game-detail/client/unity' + idClient,
-      );
-    } */
-
   linkClientGame(body) {
-    console.log(body)
+    console.log(body);
     return this.http.post<any>(
       `${environment.api}/client-game/client/${body.client_}/game/${body.game_}`,
       {}
@@ -43,7 +40,6 @@ export class GameService {
     return this.http.put<any>(
       environment.api + "/client-game-detail/file/" + id,
       file
-      // httpOptions
     );
   }
 
@@ -51,7 +47,10 @@ export class GameService {
     return this.http.put<any>(
       environment.api + "/client-game-detail/" + id,
       body
-      // httpOptions
     );
+  }
+
+  getGameById(gameId: number): Observable<IResponse<IGame>> {
+    return this.http.get<any>(`${environment.api}/game/${gameId}`);
   }
 }

@@ -9,6 +9,8 @@ import { ManagementWebComponent } from "./my-game/management-web/management-web.
 import { ManagementGameComponent } from "./my-game/management-game/management-game.component";
 import { SafePipe } from "../pipes/safe.pipe";
 
+import { PropertyComponent } from "./my-game/property/property.component";
+
 @NgModule({
   declarations: [
     GamesComponent,
@@ -16,6 +18,7 @@ import { SafePipe } from "../pipes/safe.pipe";
     ManagementWebComponent,
     ManagementGameComponent,
     SafePipe,
+    PropertyComponent
   ],
   imports: [CommonModule, GameRoutingModule, NgxFileDropModule],
 })
