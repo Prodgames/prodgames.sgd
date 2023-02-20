@@ -1,5 +1,5 @@
 <ng-container *ngIf="!loading.game">
-  <div style="height: 79vh">
+  <div style="height: 80vh">
     <div class="header pt-3 page-header">
       <div class="container-fluid">
         <div
@@ -34,20 +34,87 @@
         Get started by configuring your game and adding properties based on your
         needs.
       </p>
-      <app-property></app-property>
-      <div class="properties-container">
-        <input type="text" placeholder="name" class="property property-name" />
-        <input type="text" placeholder="value" class="property property-value" />
-        <select class="property property-select">
-          <option>a</option>
-          <option>b</option>
-          <option>c</option>
-        </select>
-        <select class="property property-select">
-          <option>a</option>
-          <option>b</option>
-          <option>c</option>
-        </select>
+      <ng-container *ngIf="!loading.properties">
+        <div
+          *ngFor="let propertyForm of propertiesForm"
+          class="properties"
+          [formGroup]="propertyForm"
+        >
+          <div class="properties-container">
+            <input
+              type="text"
+              placeholder="name"
+              class="property property-name"
+              [defaultValue]="propertyForm.get('property').value"
+              formControlName="property"
+            />
+            <input
+              type="text"
+              placeholder="value"
+              class="property property-value"
+              [defaultValue]="propertyForm.get('value').value"
+              formControlName="value"
+            />
+            <select
+              class="property property-select"
+              formControlName="type"
+              (change)="onFormGroupChange(propertyForm)"
+            >
+              <option
+                *ngFor="let type of propertyTypes; index as i"
+                value="string"
+                [selected]="type[0] === propertyForm.get('type').value"
+              >
+                {{ type[0] }}
+              </option>
+            </select>
+            <select
+              class="property property-select"
+              formControlName="environment"
+              (change)="onFormGroupChange(propertyForm)"
+            >
+              <option
+                *ngFor="let environment of propertyEnvironments; index as i"
+                value="string"
+                [selected]="
+                  environment[0] === propertyForm.get('environment').value
+                "
+              >
+                {{ environment[0] }}
+              </option>
+            </select>
+            <button
+              *ngIf="propertyForm.controls?.id"
+              class="btn-property update"
+            >
+              <img src="../../../assets/svg/icons/mdi_pencil.svg" />
+            </button>
+            <button
+              *ngIf="propertyForm.controls?.id"
+              class="btn-property delete"
+            >
+              <img src="../../../assets/svg/icons/trash.svg" />
+            </button>
+            <button
+              *ngIf="!propertyForm.controls?.id"
+              class="btn-property save"
+            >
+              <img src="../../../assets/svg/icons/check.svg" />
+            </button>
+            <button
+              *ngIf="!propertyForm.controls?.id || propertyForm.touched"
+              class="btn-property cancel"
+              (click)="onFormGroupCancel(propertyForm)"
+            >
+              <img src="../../../assets/svg/icons/cancellation.svg" />
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <div style="width: fit-content; margin: 0 auto; min-height: 100px">
+        <button class="btn-add-property" (click)="addProperty()">
+          AGREGAR
+        </button>
       </div>
     </div>
   </div>

@@ -1,95 +1,195 @@
 .btn-add-game {
-    border-style: none;
-    background-color: #EC6436;
-    color: white;
-    width: 150px;
-    height: 35px;
-    border-radius: 5px;
+  border-style: none;
+  background-color: #ec6436;
+  color: white;
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
 
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
 
-    letter-spacing: 0.05em;
-    outline: none;
+  letter-spacing: 0.05em;
+  outline: none;
 }
 
 .btn-add-game:hover {
-    transition: 500ms;
-    background-color: #186ecf;
-    box-shadow: black;
+  transition: 500ms;
+  background-color: #186ecf;
+  box-shadow: black;
 }
 
 .page-header {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    margin: 0 0px 20px 0px;
-    color: white;
+  margin: 0 0px 20px 0px;
+  color: white;
 
-    min-height: 255px;
+  min-height: 255px;
 
-    background: linear-gradient(90.09deg, #202020 10.43%, rgba(105, 0, 210, 0) 259.13%);
+  background: linear-gradient(
+    90.09deg,
+    #202020 10.43%,
+    rgba(105, 0, 210, 0) 259.13%
+  );
 }
 
 .banner-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 4px 5px rgba(97, 0, 255, 0.05);
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 5px rgba(97, 0, 255, 0.05);
 }
 
 .banner-title {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
 }
 
 .properties-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .property {
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    height: 40px;
+  height: 40px;
 
-    background: #FFFFFF;
-    border: 1px solid #EFEFEF;
-    box-shadow: 0px 0px 3px 1px rgba(193, 193, 193, 0.05);
-    border-radius: 93px;
+  background: #ffffff;
+  border: 1px solid #efefef;
+  box-shadow: 0px 0px 3px 1px rgba(193, 193, 193, 0.05);
+  border-radius: 93px;
 
-    padding: 0 20px;
+  padding: 0 20px;
 
-    outline: none;
+  outline: none;
 }
 
 .property-name {
-    width: 177px;
+  width: 177px;
 }
 
 .property-value {
-    width: 281px;
+  width: 281px;
 }
 
 .property-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('../../../assets/svg/icons/down-arrow.svg');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 25px;
-    width: 160px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("../../../assets/svg/icons/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 25px;
+  width: 160px;
+}
+
+.btn-property {
+  width: 35px;
+  height: 35px;
+
+  border-radius: 50px;
+  border-style: none;
+  outline: none;
+}
+
+.btn-property:hover {
+  box-shadow: 0px 0px 3px 1px rgba(193, 193, 193, 0.5);
+}
+
+.update {
+  background: #61d918;
+  position: relative;
+}
+
+.update img {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+
+.delete {
+  background: #fb4f57;
+  position: relative;
+}
+
+.delete img {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+
+.save {
+  background: #7eec3b;
+  position: relative;
+}
+
+.save img {
+  position: absolute;
+  top: 4px;
+  left: 3px;
+}
+
+.cancel {
+  background: #f69b46;
+  position: relative;
+}
+
+.cancel img {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+}
+
+.btn-add-property {
+  border-style: none;
+  background-color: #4098ff;
+  color: white;
+  width: 140px;
+  height: 35px;
+  border-radius: 50px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  letter-spacing: 0.05em;
+  outline: none;
+  position: relative;
+}
+
+.btn-add-property:hover {
+    transition: 500ms;
+    background-color: #186ecf;
+    box-shadow: 0 0 4px 4px, rgba(193, 193, 193, 0.1);
+}
+
+.btn-add-property img {
+  position: absolute;
+  left: 7px;
+  top: 5px;
 }
 
 @media screen and (max-width: 648px) {
-    .page-header {
-        border-bottom-style: none;
-        margin: 10px 0;
-    }
+  .page-header {
+    border-bottom-style: none;
+    margin: 10px 0;
+  }
 }

@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { IGame } from "./model/game.interface";
 import { Observable } from "rxjs";
 import { IResponse } from "./model/response.interface";
+import { IProperty } from "./model/property.interface";
 
 @Injectable({
   providedIn: "root",
@@ -52,5 +53,13 @@ export class GameService {
 
   getGameById(gameId: number): Observable<IResponse<IGame>> {
     return this.http.get<any>(`${environment.api}/game/${gameId}`);
+  }
+
+  getGamePropertiesByGameId(
+    gameId: number
+  ): Observable<IResponse<IProperty[]>> {
+    return this.http.get<IResponse<IProperty[]>>(
+      `${environment.api}/games/${gameId}/properties`
+    );
   }
 }

@@ -10,6 +10,7 @@ import { ManagementGameComponent } from "./my-game/management-game/management-ga
 import { SafePipe } from "../pipes/safe.pipe";
 
 import { PropertyComponent } from "./my-game/property/property.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { PropertyComponent } from "./my-game/property/property.component";
     SafePipe,
     PropertyComponent
   ],
-  imports: [CommonModule, GameRoutingModule, NgxFileDropModule],
+  imports: [CommonModule, GameRoutingModule, NgxFileDropModule, ReactiveFormsModule],
 })
 export class GameModule {}
