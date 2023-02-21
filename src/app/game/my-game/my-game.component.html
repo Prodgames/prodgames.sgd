@@ -1,5 +1,5 @@
 <ng-container *ngIf="!loading.game">
-  <div style="height: 80vh">
+  <div style="height: 100%">
     <div class="header pt-3 page-header">
       <div class="container-fluid">
         <div
@@ -36,7 +36,7 @@
       </p>
       <ng-container *ngIf="!loading.properties">
         <div
-          *ngFor="let propertyForm of propertiesForm"
+          *ngFor="let propertyForm of propertiesForm; index as i"
           class="properties"
           [formGroup]="propertyForm"
         >
@@ -61,11 +61,22 @@
               (change)="onFormGroupChange(propertyForm)"
             >
               <option
-                *ngFor="let type of propertyTypes; index as i"
                 value="string"
-                [selected]="type[0] === propertyForm.get('type').value"
+                [selected]="propertyForm.get('type').value === 'string'"
               >
-                {{ type[0] }}
+                string
+              </option>
+              <option
+                value="file"
+                [selected]="propertyForm.get('type').value === 'file'"
+              >
+                file
+              </option>
+              <option
+                value="int"
+                [selected]="propertyForm.get('type').value === 'int'"
+              >
+                int
               </option>
             </select>
             <select
@@ -74,37 +85,49 @@
               (change)="onFormGroupChange(propertyForm)"
             >
               <option
-                *ngFor="let environment of propertyEnvironments; index as i"
-                value="string"
-                [selected]="
-                  environment[0] === propertyForm.get('environment').value
-                "
+                value="sga"
+                [selected]="propertyForm.get('environment').value === 'sga'"
               >
-                {{ environment[0] }}
+                sga
+              </option>
+              <option
+                value="unity"
+                [selected]="propertyForm.get('environment').value === 'unity'"
+              >
+                unity
               </option>
             </select>
             <button
-              *ngIf="propertyForm.controls?.id"
+              *ngIf="propertyForm.controls?.id?.value"
               class="btn-property update"
+              (click)="updateProperty(propertyForm, i)"
             >
               <img src="../../../assets/svg/icons/mdi_pencil.svg" />
             </button>
             <button
-              *ngIf="propertyForm.controls?.id"
+              *ngIf="propertyForm.controls?.id?.value"
               class="btn-property delete"
+              (click)="deleteProperty(propertyForm, i)"
             >
               <img src="../../../assets/svg/icons/trash.svg" />
             </button>
             <button
-              *ngIf="!propertyForm.controls?.id"
+              *ngIf="!propertyForm.controls?.id?.value"
               class="btn-property save"
+              (click)="saveProperty(propertyForm, i)"
+              [disabled]="!propertyForm.valid"
+              [style.background]="propertyForm.valid ? '#7eec3b' : '#E7E7E7'"
             >
               <img src="../../../assets/svg/icons/check.svg" />
             </button>
             <button
-              *ngIf="!propertyForm.controls?.id || propertyForm.touched"
+              *ngIf="!propertyForm.controls?.id?.value || propertyForm.touched"
               class="btn-property cancel"
-              (click)="onFormGroupCancel(propertyForm)"
+              (click)="
+                propertyForm.controls?.id?.value
+                  ? onFormGroupCancel(propertyForm)
+                  : cancelProperty(i)
+              "
             >
               <img src="../../../assets/svg/icons/cancellation.svg" />
             </button>

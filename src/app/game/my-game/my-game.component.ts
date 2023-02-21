@@ -49,61 +49,208 @@ export class MyGameComponent implements OnInit {
     this.getGameId();
     this.getGame();
     this.getGameProperties();
-
-    Object.keys(PropertyTypes).forEach((key) => {
-      this.propertyTypes = [...this.propertyTypes, { [0]: PropertyTypes[key] }];
-    });
-
-    Object.keys(PropertyEnvironment).forEach((key) => {
-      this.propertyEnvironments = [
-        ...this.propertyEnvironments,
-        { [0]: PropertyEnvironment[key] },
-      ];
-    });
-  }
-
-  addControlToForm(prop: IProperty) {
-    this.gamePropertiesForm.addControl(
-      prop.property,
-      this.fb.control(prop.value, Validators.required)
-    );
   }
 
   addProperty() {
-    const newProp: IProperty = {
-      property: "",
-      value: "",
-      type: null,
-      environment: null,
-    };
     const auxFormControl = new FormGroup({
-      property: new FormControl(null),
-      value: new FormControl(null),
-      type: new FormControl(null),
-      environment: new FormControl(null),
+      property: new FormControl(null, [Validators.required]),
+      value: new FormControl(null, [Validators.required]),
+      type: new FormControl(null, [Validators.required]),
+      environment: new FormControl(null, [Validators.required]),
+      id: new FormControl(null),
+      createdAt: new FormControl(null),
+      updateAt: new FormControl(null),
     });
 
     this.propertiesForm.push(auxFormControl);
-    //this.gameProperties.push(newProp);
-    //this.addControlToForm(newProp);
+    this.gameProperties.push({
+      environment: null,
+      property: null,
+      status: null,
+      type: null,
+      value: null,
+      id: null,
+      createdAt: null,
+      updateAt: null,
+    });
   }
 
-  updateProperty(prop: IProperty) {
-    console.log(`Actualizar propiedad: ${prop.property}`);
+  updateProperty(formProperty: FormGroup, index: number) {
+    console.log(`Actualizar propiedad: ${index}`, formProperty);
+    Swal.fire({
+      backdrop: false,
+      title: "Mensaje de confirmación !!",
+      text: `¿Esta seguro de actualizar la propiedad ${
+        formProperty.get("property").value
+      }?`,
+      icon: "question",
+      confirmButtonText: "Si",
+      denyButtonText: "No",
+      showConfirmButton: true,
+      showDenyButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.updatePropertyById(
+          this.gameId,
+          {
+            ...formProperty.value,
+          } as IProperty,
+          index,
+          formProperty
+        );
+      }
+    });
   }
 
-  deleteProperty(prop: IProperty) {
-    console.log(`Eliminar propiedad: ${prop.property}`);
-    const index = this.gameProperties.findIndex((p) => p.id === prop.id);
-    if (index !== -1) {
+  updatePropertyById(
+    gameId: number,
+    propertyData: IProperty,
+    index: number,
+    formProperty: FormGroup
+  ) {
+    this.gameService.updatePropertyById(gameId, propertyData).subscribe({
+      next: (response) => {
+        if (typeof response.resource !== "string") {
+          this.gameProperties[index] = response.resource;
+          console.log(this.gameProperties[index])
+          formProperty.reset({
+            createdAt: this.gameProperties[index].createdAt,
+            environment: this.gameProperties[index].environment,
+            id: this.gameProperties[index].id,
+            property: this.gameProperties[index].property,
+            status: this.gameProperties[index].status,
+            type: this.gameProperties[index].type,
+            updateAt: this.gameProperties[index].updateAt,
+            value: this.gameProperties[index].value,
+          });
+
+          Swal.fire({
+            backdrop: false,
+            title: "Mensaje de confirmación !!",
+            text: `La propiedad se actualizo correctamente`,
+            icon: "success",
+            confirmButtonText: "Ok",
+            showConfirmButton: true,
+          });
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  cancelProperty(index: number, fromDel?: boolean) {
+    if (fromDel) {
+      this.propertiesForm.splice(index, 1);
       this.gameProperties.splice(index, 1);
-      this.gamePropertiesForm.removeControl(prop.property);
+    } else {
+      Swal.fire({
+        backdrop: false,
+        title: "Mensaje de confirmación !!",
+        text: `¿Esta seguro de cancelar la propiedad?`,
+        icon: "question",
+        confirmButtonText: "Si",
+        denyButtonText: "No",
+        showConfirmButton: true,
+        showDenyButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.propertiesForm.splice(index, 1);
+          this.gameProperties.splice(index, 1);
+        }
+      });
     }
   }
 
-  saveProperties() {
+  deleteProperty(formProperty: FormGroup, index: number) {
+    Swal.fire({
+      backdrop: false,
+      title: "Mensaje de confirmación !!",
+      text: `¿Esta seguro de eliminar la propiedad ${
+        formProperty.get("property").value
+      }?`,
+      icon: "question",
+      confirmButtonText: "Si",
+      denyButtonText: "No",
+      showConfirmButton: true,
+      showDenyButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deletePropertyById(
+          this.gameId,
+          formProperty.get("id").value,
+          index
+        );
+      }
+    });
+  }
+
+  deletePropertyById(gameId: number, propertyId: number, index: number) {
+    this.gameService.deletePropertyById(gameId, propertyId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          Swal.fire({
+            backdrop: false,
+            title: "Mensaje de confirmación !!",
+            text: `La propiedad fue eliminada correctamente`,
+            icon: "success",
+            confirmButtonText: "Ok",
+            showConfirmButton: true,
+          });
+
+          this.cancelProperty(index, true);
+        }
+      },
+    });
+  }
+
+  saveProperty(propertyForm: FormGroup, index: number) {
     console.log("Guardar propiedades");
-    console.log(this.gamePropertiesForm.value);
+    console.log(propertyForm.value.type);
+
+    this.gameService
+      .saveProperty(
+        [
+          {
+            property: propertyForm.value.property,
+            value: propertyForm.value.value,
+            type: propertyForm.value.type,
+            environment: propertyForm.value.environment,
+          } as IProperty,
+        ],
+        this.gameId
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          if (typeof response.resource !== "string") {
+            this.gameProperties[index] = response.resource[0];
+            propertyForm.reset({
+              createdAt: this.gameProperties[index].createdAt,
+              environment: this.gameProperties[index].environment,
+              id: this.gameProperties[index].id,
+              property: this.gameProperties[index].property,
+              status: this.gameProperties[index].status,
+              type: this.gameProperties[index].type,
+              updateAt: this.gameProperties[index].updateAt,
+              value: this.gameProperties[index].value,
+            });
+
+            Swal.fire({
+              backdrop: false,
+              title: "Mensaje de confirmación !!",
+              text: `La propiedad se creo correctamente`,
+              icon: "success",
+              confirmButtonText: "Ok",
+              showConfirmButton: true,
+            });
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   getGameId() {
@@ -151,7 +298,10 @@ export class MyGameComponent implements OnInit {
     this.gameProperties.map((property) => {
       let auxFormGroup = new FormGroup({});
       Object.keys(property).map((key) => {
-        auxFormGroup.addControl(key, new FormControl(property[key]));
+        auxFormGroup.addControl(
+          key,
+          new FormControl(property[key], [Validators.required])
+        );
       });
       this.propertiesForm.push(auxFormGroup);
     });
@@ -164,13 +314,7 @@ export class MyGameComponent implements OnInit {
         if (typeof response.resource !== "string") {
           this.gameProperties = response.resource;
 
-          this.gameProperties.forEach((prop) => {
-            this.addControlToForm(prop);
-          });
-
           this.setPropertiesToForm();
-
-          console.log(this.gamePropertiesForm);
         }
 
         this.loading.properties = false;

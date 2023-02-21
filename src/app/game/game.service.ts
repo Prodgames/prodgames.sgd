@@ -62,4 +62,33 @@ export class GameService {
       `${environment.api}/games/${gameId}/properties`
     );
   }
+
+  saveProperty(
+    property: IProperty[],
+    gameId: number
+  ): Observable<IResponse<IProperty[]>> {
+    return this.http.post<IResponse<IProperty[]>>(
+      `${environment.api}/games/${gameId}/properties`,
+      property
+    );
+  }
+
+  deletePropertyById(
+    gameId: number,
+    propertyId: number
+  ): Observable<IResponse<any>> {
+    return this.http.delete<IResponse<any>>(
+      `${environment.api}/games/${gameId}/properties/${propertyId}`
+    );
+  }
+
+  updatePropertyById(
+    gameId: number,
+    propertyData: IProperty
+  ): Observable<IResponse<IProperty>> {
+    return this.http.put<IResponse<IProperty>>(
+      `${environment.api}/games/${gameId}/properties/${propertyData.id}`,
+      propertyData
+    );
+  }
 }

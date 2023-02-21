@@ -19,8 +19,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     ManagementWebComponent,
     ManagementGameComponent,
     SafePipe,
-    PropertyComponent
+    PropertyComponent,
   ],
-  imports: [CommonModule, GameRoutingModule, NgxFileDropModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    GameRoutingModule,
+    NgxFileDropModule,
+    ReactiveFormsModule,
+  ],
 })
 export class GameModule {}
