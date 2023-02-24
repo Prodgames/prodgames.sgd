@@ -47,6 +47,7 @@
               class="property property-name"
               [defaultValue]="propertyForm.get('property').value"
               formControlName="property"
+              (click)="onFormGroupChange(propertyForm)"
             />
             <input
               type="text"
@@ -54,11 +55,12 @@
               class="property property-value"
               [defaultValue]="propertyForm.get('value').value"
               formControlName="value"
+              (click)="onFormGroupChange(propertyForm)"
             />
             <select
               class="property property-select"
               formControlName="type"
-              (change)="onFormGroupChange(propertyForm)"
+              (click)="onFormGroupChange(propertyForm)"
             >
               <option
                 value="string"
@@ -82,7 +84,7 @@
             <select
               class="property property-select"
               formControlName="environment"
-              (change)="onFormGroupChange(propertyForm)"
+              (click)="onFormGroupChange(propertyForm)"
             >
               <option
                 value="sga"
