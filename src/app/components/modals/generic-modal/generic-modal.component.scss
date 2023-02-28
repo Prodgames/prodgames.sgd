@@ -1,0 +1,26 @@
+br-modal {
+  display: none;
+
+  .br-modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10000;
+
+    background-color: rgba(0, 0, 0, 0.75);
+
+    overflow: auto;
+  }
+
+  .br-modal-body {
+    background: #fff;
+  }
+}
+
+body.br-modal-open {
+  overflow: hidden;
+}

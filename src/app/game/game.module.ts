@@ -11,6 +11,8 @@ import { SafePipe } from "../pipes/safe.pipe";
 
 import { PropertyComponent } from "./my-game/property/property.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { GameModalComponent } from "./game-modal/game-modal.component";
+import { GenericModalComkponent } from "../components/modals/generic-modal/generic-modal.component";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     ManagementGameComponent,
     SafePipe,
     PropertyComponent,
+    GameModalComponent,
+    GenericModalComkponent
   ],
   imports: [
     CommonModule,

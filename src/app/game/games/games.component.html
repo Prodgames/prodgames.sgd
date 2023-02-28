@@ -26,7 +26,26 @@
           </div>
         </div>
         <div>
-          <button class="btn-add-game">+ NUEVO</button>
+          <button class="btn-add-game" (click)="modalService.open('modal-01')">
+            + NUEVO
+          </button>
+
+          <br-modal id="modal-01">
+            <div style="height: 50vh; width: fit-content; padding: 15px">
+              <strong>Add Game</strong><br />
+              <input
+                type="text"
+                style="width: 300px"
+                placeholder="name"
+              /><br />
+              <input
+                type="text"
+                style="width: 300px"
+                placeholder="description"
+              /><br />
+              <input type="file" style="width: 300px" placeholder="Name" />
+            </div>
+          </br-modal>
         </div>
       </div>
     </div>
