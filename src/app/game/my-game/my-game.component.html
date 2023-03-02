@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="">
+    <div>
       <p style="margin-left: 80px">
         Get started by configuring your game and adding properties based on your
         needs.
@@ -41,6 +41,30 @@
           [formGroup]="propertyForm"
         >
           <div class="properties-container">
+            <label>
+              <img
+                style="width: 100px"
+                *ngIf="
+                  propertyForm.get('type').value === 'file' &&
+                  propertyForm.get('value').value
+                "
+                class="property-value-image"
+                [src]="propertyForm.get('value').value"
+              />
+              <input
+                *ngIf="
+                  propertyForm.get('type').value === 'file' &&
+                  propertyForm.get('value').value
+                "
+                #fileInput
+                class="property-value-file"
+                type="file"
+                accept="image/*"
+                style="display: none;"
+                (change)="onFileSelect($event, propertyForm, i)"
+                (click)="onFormGroupChange(propertyForm)"
+              />
+            </label>
             <input
               type="text"
               placeholder="name"
@@ -50,6 +74,7 @@
               (click)="onFormGroupChange(propertyForm)"
             />
             <input
+              *ngIf="propertyForm.get('type').value !== 'file'"
               type="text"
               placeholder="value"
               class="property property-value"
@@ -60,7 +85,7 @@
             <select
               class="property property-select"
               formControlName="type"
-              (click)="onFormGroupChange(propertyForm)"
+              (click)="onFormGroupChange(propertyForm, i)"
             >
               <option
                 value="string"

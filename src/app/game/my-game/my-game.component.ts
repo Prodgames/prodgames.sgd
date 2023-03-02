@@ -17,6 +17,11 @@ import { PropertyTypes } from "../model/property-types.enum";
 import { PropertyEnvironment } from "../model/property-environment.enum";
 var $: any;
 
+interface PropertyFile {
+  index: number;
+  file: File;
+}
+
 @Component({
   selector: "app-my-game",
   templateUrl: "./my-game.component.html",
@@ -37,6 +42,8 @@ export class MyGameComponent implements OnInit {
 
   propertyTypes = [];
   propertyEnvironments = [];
+
+  files = [] as PropertyFile[];
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -112,7 +119,7 @@ export class MyGameComponent implements OnInit {
       next: (response) => {
         if (typeof response.resource !== "string") {
           this.gameProperties[index] = response.resource;
-          console.log(this.gameProperties[index])
+          console.log(this.gameProperties[index]);
           formProperty.reset({
             createdAt: this.gameProperties[index].createdAt,
             environment: this.gameProperties[index].environment,
@@ -158,6 +165,19 @@ export class MyGameComponent implements OnInit {
         if (result.isConfirmed) {
           this.propertiesForm.splice(index, 1);
           this.gameProperties.splice(index, 1);
+
+          let indexAux = -1;
+
+          this.files.forEach((file, i) => {
+            indexAux = i;
+          });
+
+          this.files.splice(indexAux, 1);
+
+          this.files.map((file) => ({
+            ...file,
+            index: file.index > index ? index-- : file.index,
+          }));
         }
       });
     }
@@ -271,7 +291,14 @@ export class MyGameComponent implements OnInit {
     });
   }
 
-  onFormGroupChange(formGroup: FormGroup) {
+  onFormGroupChange(formGroup: FormGroup, index?: number) {
+    if (
+      typeof index === "number" &&
+      formGroup.get("type").value !== this.gameProperties[index].type &&
+      formGroup.get("type").value === "file"
+    ) {
+      formGroup.patchValue({ value: "../../../assets/svg/icons/image.svg" });
+    }
     formGroup.markAllAsTouched();
   }
 
@@ -308,11 +335,62 @@ export class MyGameComponent implements OnInit {
     console.log(this.propertiesForm);
   }
 
+  onFileSelect(event: any, propertyForm: FormGroup, index: number) {
+    let existingFile = false;
+
+    this.files.map((file) => {
+      if (file.index === index) {
+        existingFile = true;
+        file.file = event.target.files[0];
+      }
+    });
+
+    if (existingFile === false) {
+      this.files.push({
+        index: index,
+        file: event.target.files[0],
+      } as PropertyFile);
+    }
+
+    console.log(this.files);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      propertyForm.patchValue({
+        value: reader.result,
+      });
+    };
+  }
+
   getGameProperties() {
     this.gameService.getGamePropertiesByGameId(this.gameId).subscribe({
-      next: (response) => {
+      next: async (response) => {
         if (typeof response.resource !== "string") {
           this.gameProperties = response.resource;
+
+          const promises = this.gameProperties.map(async (property, index) => {
+            if (property.type === PropertyTypes.FILE) {
+              let fileName = property.value.split("?")[0].split("/")[
+                property.value.split("?")[0].split("/").length - 1
+              ];
+
+              let fileExtention = fileName.substring(
+                fileName.lastIndexOf(".") + 1
+              );
+
+              await fetch(property.value)
+                .then((response) => response.blob())
+                .then((blob) => {
+                  this.files.push({
+                    index: index,
+                    file: new File([blob], fileName, { type: fileExtention }),
+                  } as PropertyFile);
+                });
+            }
+          });
+
+          Promise.all(promises);
 
           this.setPropertiesToForm();
         }
