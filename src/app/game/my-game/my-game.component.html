@@ -60,7 +60,7 @@
                 class="property-value-file"
                 type="file"
                 accept="image/*"
-                style="display: none;"
+                style="display: none"
                 (change)="onFileSelect($event, propertyForm, i)"
                 (click)="onFormGroupChange(propertyForm)"
               />
@@ -142,8 +142,18 @@
               *ngIf="!propertyForm.controls?.id?.value"
               class="btn-property save"
               (click)="saveProperty(propertyForm, i)"
-              [disabled]="!propertyForm.valid"
-              [style.background]="propertyForm.valid ? '#7eec3b' : '#E7E7E7'"
+              [disabled]="
+                (!propertyForm.valid ||
+                propertyForm.get('value').value ===
+                  '../../../assets/svg/icons/image.svg'
+              )"
+              [style.background]="
+                propertyForm.valid &&
+                propertyForm.get('value').value !==
+                  '../../../assets/svg/icons/image.svg'
+                  ? '#7eec3b'
+                  : '#E7E7E7'
+              "
             >
               <img src="../../../assets/svg/icons/check.svg" />
             </button>

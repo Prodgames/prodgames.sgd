@@ -115,35 +115,74 @@ export class MyGameComponent implements OnInit {
     index: number,
     formProperty: FormGroup
   ) {
-    this.gameService.updatePropertyById(gameId, propertyData).subscribe({
-      next: (response) => {
-        if (typeof response.resource !== "string") {
-          this.gameProperties[index] = response.resource;
-          console.log(this.gameProperties[index]);
-          formProperty.reset({
-            createdAt: this.gameProperties[index].createdAt,
-            environment: this.gameProperties[index].environment,
-            id: this.gameProperties[index].id,
-            property: this.gameProperties[index].property,
-            status: this.gameProperties[index].status,
-            type: this.gameProperties[index].type,
-            updateAt: this.gameProperties[index].updateAt,
-            value: this.gameProperties[index].value,
-          });
-
-          Swal.fire({
-            backdrop: false,
-            title: "Mensaje de confirmación !!",
-            text: `La propiedad se actualizo correctamente`,
-            icon: "success",
-            confirmButtonText: "Ok",
-            showConfirmButton: true,
-          });
+    let file: File = null;
+    if (formProperty.get("type").value === "file") {
+      this.files.map((element) => {
+        if (element.index === index) {
+          file = element.file;
         }
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      });
+      this.gameService
+        .updatePropertyFileById(gameId, propertyData, file)
+        .subscribe({
+          next: (response) => {
+            if (typeof response.resource !== "string") {
+              this.setDataOnResponse(response.resource, formProperty, index);
+
+              Swal.fire({
+                backdrop: false,
+                title: "Mensaje de confirmación !!",
+                text: `La propiedad se actualizo correctamente`,
+                icon: "success",
+                confirmButtonText: "Ok",
+                showConfirmButton: true,
+              });
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+    } else {
+      this.gameService.updatePropertyById(gameId, propertyData).subscribe({
+        next: (response) => {
+          console.log(response);
+          if (typeof response.resource !== "string") {
+            this.setDataOnResponse(response.resource, formProperty, index);
+
+            Swal.fire({
+              backdrop: false,
+              title: "Mensaje de confirmación !!",
+              text: `La propiedad se actualizo correctamente`,
+              icon: "success",
+              confirmButtonText: "Ok",
+              showConfirmButton: true,
+            });
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
+  }
+
+  setDataOnResponse(
+    resource: IProperty,
+    formProperty: FormGroup,
+    index: number
+  ) {
+    this.gameProperties[index] = resource;
+    console.log(this.gameProperties[index]);
+    formProperty.reset({
+      createdAt: this.gameProperties[index].createdAt,
+      environment: this.gameProperties[index].environment,
+      id: this.gameProperties[index].id,
+      property: this.gameProperties[index].property,
+      status: this.gameProperties[index].status,
+      type: this.gameProperties[index].type,
+      updateAt: this.gameProperties[index].updateAt,
+      value: this.gameProperties[index].value,
     });
   }
 
@@ -229,48 +268,88 @@ export class MyGameComponent implements OnInit {
     console.log("Guardar propiedades");
     console.log(propertyForm.value.type);
 
-    this.gameService
-      .saveProperty(
-        [
+    let file: File = null;
+    if (propertyForm.get("type").value === "file") {
+      this.files.map((element) => {
+        if (element.index === index) {
+          file = element.file;
+        }
+      });
+
+      this.gameService
+        .savePropertyFile(
           {
             property: propertyForm.value.property,
             value: propertyForm.value.value,
             type: propertyForm.value.type,
             environment: propertyForm.value.environment,
           } as IProperty,
-        ],
-        this.gameId
-      )
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          if (typeof response.resource !== "string") {
-            this.gameProperties[index] = response.resource[0];
-            propertyForm.reset({
-              createdAt: this.gameProperties[index].createdAt,
-              environment: this.gameProperties[index].environment,
-              id: this.gameProperties[index].id,
-              property: this.gameProperties[index].property,
-              status: this.gameProperties[index].status,
-              type: this.gameProperties[index].type,
-              updateAt: this.gameProperties[index].updateAt,
-              value: this.gameProperties[index].value,
-            });
+          this.gameId,
+          file
+        )
+        .subscribe({
+          next: (response) => {
+            if (typeof response.resource !== "string") {
+              this.setDataOnResponse(response.resource, propertyForm, index);
 
-            Swal.fire({
-              backdrop: false,
-              title: "Mensaje de confirmación !!",
-              text: `La propiedad se creo correctamente`,
-              icon: "success",
-              confirmButtonText: "Ok",
-              showConfirmButton: true,
-            });
-          }
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+              Swal.fire({
+                backdrop: false,
+                title: "Mensaje de confirmación !!",
+                text: `La propiedad se actualizo correctamente`,
+                icon: "success",
+                confirmButtonText: "Ok",
+                showConfirmButton: true,
+              });
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+    } else {
+      this.gameService
+        .saveProperty(
+          [
+            {
+              property: propertyForm.value.property,
+              value: propertyForm.value.value,
+              type: propertyForm.value.type,
+              environment: propertyForm.value.environment,
+            } as IProperty,
+          ],
+          this.gameId
+        )
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            if (typeof response.resource !== "string") {
+              this.gameProperties[index] = response.resource[0];
+              propertyForm.reset({
+                createdAt: this.gameProperties[index].createdAt,
+                environment: this.gameProperties[index].environment,
+                id: this.gameProperties[index].id,
+                property: this.gameProperties[index].property,
+                status: this.gameProperties[index].status,
+                type: this.gameProperties[index].type,
+                updateAt: this.gameProperties[index].updateAt,
+                value: this.gameProperties[index].value,
+              });
+
+              Swal.fire({
+                backdrop: false,
+                title: "Mensaje de confirmación !!",
+                text: `La propiedad se creo correctamente`,
+                icon: "success",
+                confirmButtonText: "Ok",
+                showConfirmButton: true,
+              });
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+    }
   }
 
   getGameId() {

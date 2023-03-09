@@ -73,6 +73,24 @@ export class GameService {
     );
   }
 
+  savePropertyFile(
+    propertyData: IProperty,
+    gameId: number,
+    file: any
+  ): Observable<IResponse<IProperty>> {
+    const formData = new FormData();
+
+    formData.append("property", propertyData.property);
+    formData.append("value", file);
+    formData.append("type", propertyData.type);
+    formData.append("environment", propertyData.environment);
+
+    return this.http.post<IResponse<IProperty>>(
+      `${environment.api}/games/${gameId}/properties/file`,
+      formData
+    );
+  }
+
   deletePropertyById(
     gameId: number,
     propertyId: number
@@ -89,6 +107,24 @@ export class GameService {
     return this.http.put<IResponse<IProperty>>(
       `${environment.api}/games/${gameId}/properties/${propertyData.id}`,
       propertyData
+    );
+  }
+
+  updatePropertyFileById(
+    gameId: number,
+    propertyData: IProperty,
+    file: any
+  ): Observable<IResponse<IProperty>> {
+    const formData = new FormData();
+
+    formData.append("property", propertyData.property);
+    formData.append("value", file);
+    formData.append("type", propertyData.type);
+    formData.append("environment", propertyData.environment);
+
+    return this.http.put<IResponse<IProperty>>(
+      `${environment.api}/games/${gameId}/properties/file/${propertyData.id}`,
+      formData
     );
   }
 }
