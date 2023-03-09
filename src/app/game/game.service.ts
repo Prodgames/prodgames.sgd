@@ -63,6 +63,23 @@ export class GameService {
     );
   }
 
+  saveGame(gameData: IGame, image: File): Observable<IResponse<IGame>> {
+    const formData = new FormData();
+
+    formData.append("name", gameData.name);
+    formData.append("description", gameData.description);
+    formData.append("photo", image);
+
+    console.log(formData);
+    console.log(typeof image);
+    console.log(gameData);
+
+    return this.http.post<IResponse<IGame>>(
+      `${environment.api}/game`,
+      formData
+    );
+  }
+
   saveProperty(
     property: IProperty[],
     gameId: number

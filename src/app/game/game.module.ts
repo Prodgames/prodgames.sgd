@@ -10,9 +10,11 @@ import { ManagementGameComponent } from "./my-game/management-game/management-ga
 import { SafePipe } from "../pipes/safe.pipe";
 
 import { PropertyComponent } from "./my-game/property/property.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GameModalComponent } from "./game-modal/game-modal.component";
 import { GenericModalComkponent } from "../components/modals/generic-modal/generic-modal.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgxDropzoneModule } from "ngx-dropzone";
 
 @NgModule({
   declarations: [
@@ -23,13 +25,17 @@ import { GenericModalComkponent } from "../components/modals/generic-modal/gener
     SafePipe,
     PropertyComponent,
     GameModalComponent,
-    GenericModalComkponent
+    GenericModalComkponent,
   ],
   imports: [
     CommonModule,
     GameRoutingModule,
     NgxFileDropModule,
     ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
+    NgxDropzoneModule,
+    NgxFileDropModule,
   ],
 })
 export class GameModule {}

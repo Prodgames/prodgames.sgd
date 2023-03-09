@@ -1,3 +1,59 @@
-<p>
-  game-modal works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{ title }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="closeMyModal(false)"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="myForm">
+    <input
+      class="input"
+      type="text"
+      placeholder="Title"
+      formControlName="title"
+      style="height: 40px"
+    />
+    <textarea
+      class="input"
+      placeholder="Description"
+      formControlName="description"
+      style="height: 100px"
+    ></textarea>
+    <div class="upload-container">
+      <label for="file" class="label-upload-image">Subir Imagen</label>
+      <input
+        type="file"
+        formControlName="file"
+        id="file"
+        style="display: none"
+        accept="image/jpeg, image/jpg, image/png"
+        (change)="onImageSelected($event)"
+      />
+      <div style="width: fit-content; margin: 0 auto">
+        <img [src]="imageInB64" *ngIf="myForm.get('file').value" width="200" height="200" />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="saveGame()"
+    [disabled]="!myForm.valid"
+  >
+    Guardar
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="closeMyModal(false)"
+  >
+    Cerrar
+  </button>
+</div>
